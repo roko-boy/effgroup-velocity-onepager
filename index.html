@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eagle Brands × Aisle — Retail Velocity Partnership</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #faf8f4;
+      color: #1a1a1a;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, #1B2A5C 0%, #2d4080 100%);
+      color: white;
+      padding: 56px 40px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .header .eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 14px;
+    }
+    .header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .header h1 span { color: #F07040; }
+    .header .subtitle {
+      font-size: 16px;
+      opacity: 0.8;
+      max-width: 620px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+
+    /* ── Category pills ── */
+    .category-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .cat-pill {
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .cat-snacking  { background: #4A9CA5; color: white; }
+    .cat-baking    { background: #F07040; color: white; }
+    .cat-meal      { background: #7A2244; color: white; }
+
+    /* ── Brand grid ── */
+    .section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 32px;
+    }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1B2A5C;
+      margin-bottom: 6px;
+    }
+    .section-sub {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 700px) {
+      .brand-grid { grid-template-columns: repeat(2, 1fr); }
+      .header h1 { font-size: 26px; }
+    }
+    .brand-card {
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      border: 1px solid rgba(0,0,0,0.07);
+      background: white;
+    }
+    .brand-card .brand-name {
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .brand-card .brand-cat {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .bc-snacking { border-top: 4px solid #4A9CA5; }
+    .bc-baking   { border-top: 4px solid #F07040; }
+    .bc-meal     { border-top: 4px solid #7A2244; }
+
+    /* ── Timeline ── */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 700px) { .timeline { grid-template-columns: 1fr; } }
+    .tl-block {
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      border: 1px solid rgba(0,0,0,0.07);
+      position: relative;
+    }
+    .tl-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .tl-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1B2A5C;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f0ece4;
+    }
+    .tl-items { list-style: none; }
+    .tl-items li {
+      font-size: 13px;
+      color: #444;
+      padding: 5px 0 5px 18px;
+      position: relative;
+      line-height: 1.4;
+    }
+    .tl-items li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #F07040;
+      font-weight: 700;
+    }
+    .tl-0 .tl-num { color: #4A9CA5; }
+    .tl-1 .tl-num { color: #F07040; }
+    .tl-2 .tl-num { color: #7A2244; }
+
+    /* ── Program blocks ── */
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 700px) { .program-grid { grid-template-columns: 1fr; } }
+    .prog-card {
+      background: white;
+      border-radius: 14px;
+      padding: 26px;
+      border: 1px solid rgba(0,0,0,0.07);
+    }
+    .prog-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+    .prog-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1B2A5C;
+      margin-bottom: 8px;
+    }
+    .prog-card p {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .prog-bullets { list-style: none; }
+    .prog-bullets li {
+      font-size: 13px;
+      color: #333;
+      padding: 4px 0 4px 16px;
+      position: relative;
+    }
+    .prog-bullets li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+    .icon-oos    { background: #fff3ee; }
+    .icon-locator { background: #eef6ff; }
+    .icon-offers  { background: #f0fff4; }
+    .icon-community { background: #fef9ee; }
+    .icon-paid    { background: #f8f0ff; }
+    .icon-retention { background: #fff0f3; }
+    .icon-survey  { background: #f0fef9; }
+
+    /* ── Discovery section ── */
+    .discovery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 700px) { .discovery-grid { grid-template-columns: 1fr; } }
+    .disc-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(0,0,0,0.07);
+    }
+    .disc-card .disc-q {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1B2A5C;
+      margin-bottom: 6px;
+    }
+    .disc-card .disc-a {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* ── KPI highlight bar ── */
+    .kpi-bar {
+      background: linear-gradient(135deg, #1B2A5C, #2d4080);
+      border-radius: 16px;
+      padding: 36px 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+      color: white;
+    }
+    @media (max-width: 700px) { .kpi-bar { grid-template-columns: repeat(2, 1fr); } }
+    .kpi-item { text-align: center; }
+    .kpi-item .kpi-val {
+      font-size: 32px;
+      font-weight: 800;
+      color: #F07040;
+      line-height: 1;
+    }
+    .kpi-item .kpi-label {
+      font-size: 12px;
+      opacity: 0.75;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: #ede8df;
+      margin: 0 0 48px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: #1B2A5C;
+      color: white;
+      text-align: center;
+      padding: 36px 32px;
+    }
+    .footer p { font-size: 14px; opacity: 0.7; margin-top: 8px; }
+    .footer .cta {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 28px;
+      background: #F07040;
+      color: white;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    /* ── Badge ── */
+    .badge {
+      display: inline-block;
+      background: #F07040;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="header">
+  <div class="eyebrow">Retail Velocity Partnership</div>
+  <h1>Eagle Brands <span>×</span> Aisle</h1>
+  <p class="subtitle">A 90-day program to drive measurable retail velocity across your entire portfolio — from shelf confidence to consumer conversion to repeat purchase.</p>
+  <div class="category-bar">
+    <span class="cat-pill cat-snacking">Snacking</span>
+    <span class="cat-pill cat-baking">Baking</span>
+    <span class="cat-pill cat-meal">Meal Solutions</span>
+  </div>
+</div>
+
+<!-- ── BRANDS IN SCOPE ── -->
+<div class="section">
+  <div class="section-label">Portfolio</div>
+  <div class="section-title">8 Brands. One Coordinated Motion.</div>
+  <div class="section-sub">We'll build a prioritized rollout plan across your full portfolio — each brand gets its own evergreen offer, reporting cadence, and velocity playbook.</div>
+
+  <div class="brand-grid">
+    <div class="brand-card bc-baking">
+      <div class="brand-name">Eagle Brand</div>
+      <div class="brand-cat" style="color:#F07040">Baking</div>
+    </div>
+    <div class="brand-card bc-snacking">
+      <div class="brand-name">G.H. Cretors</div>
+      <div class="brand-cat" style="color:#4A9CA5">Snacking</div>
+    </div>
+    <div class="brand-card bc-snacking">
+      <div class="brand-name">Popcorn Indiana</div>
+      <div class="brand-cat" style="color:#4A9CA5">Snacking</div>
+    </div>
+    <div class="brand-card bc-meal">
+      <div class="brand-name">Suddenly Salad</div>
+      <div class="brand-cat" style="color:#7A2244">Meal Solutions</div>
+    </div>
+    <div class="brand-card bc-meal">
+      <div class="brand-name">Hamburger Helper</div>
+      <div class="brand-cat" style="color:#7A2244">Meal Solutions · US + CA</div>
+    </div>
+    <div class="brand-card bc-baking">
+      <div class="brand-name">Magnolia</div>
+      <div class="brand-cat" style="color:#F07040">Baking</div>
+    </div>
+    <div class="brand-card bc-baking">
+      <div class="brand-name">PetMilk</div>
+      <div class="brand-cat" style="color:#F07040">Baking</div>
+    </div>
+    <div class="brand-card bc-baking">
+      <div class="brand-name">Milnot</div>
+      <div class="brand-cat" style="color:#F07040">Baking</div>
+    </div>
+  </div>
+
+  <!-- KPI targets -->
+  <div class="kpi-bar">
+    <div class="kpi-item">
+      <div class="kpi-val">2–3×</div>
+      <div class="kpi-label">Target ROI on evergreen offers</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-val">20%+</div>
+      <div class="kpi-label">Minimum consumer value (% of product price)</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-val">90</div>
+      <div class="kpi-label">Days to full portfolio activation</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-val">$0</div>
+      <div class="kpi-label">Extra cost to list on Aisle community site</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── DISCOVERY ── -->
+<div style="background: white;">
+<div class="section">
+  <div class="section-label">Phase 1</div>
+  <div class="section-title">Discovery — Getting Aligned</div>
+  <div class="section-sub">Before we build anything, we need to align on inputs. Here's what we'll cover to ensure every program is calibrated for your business.</div>
+
+  <div class="discovery-grid">
+    <div class="disc-card">
+      <div class="disc-q">📐 Velocity Definition</div>
+      <div class="disc-a">What does "winning" look like in 60–90 days? Units sold, repeat rate, priority retailers, priority regions — let's define it together.</div>
+    </div>
+    <div class="disc-card">
+      <div class="disc-q">📊 Current Rebates + Performance</div>
+      <div class="disc-a">What's running today? What's worked, what hasn't? We'll audit existing programs before recommending anything new.</div>
+    </div>
+    <div class="disc-card">
+      <div class="disc-q">🏷️ Brand Prioritization</div>
+      <div class="disc-a">Which brands need velocity support urgently? We'll tier the portfolio and stage rollout accordingly.</div>
+    </div>
+    <div class="disc-card">
+      <div class="disc-q">🛒 SKU + Retailer Focus</div>
+      <div class="disc-a">Any hero SKUs or priority retailers to lead with? We'll build offers around what matters most to your buyers.</div>
+    </div>
+    <div class="disc-card">
+      <div class="disc-q">💰 Offer Economics Guardrails</div>
+      <div class="disc-a">Incentive caps, exclusions, preferred value thresholds. We'll recommend 20%+ of product value where feasible — but we'll work within your guardrails.</div>
+    </div>
+    <div class="disc-card">
+      <div class="disc-q">📈 Measurement Alignment</div>
+      <div class="disc-a">Who gets reports, how often, and on what KPIs? Weekly or monthly cadence — we'll set this up before anything goes live.</div>
+    </div>
+  </div>
+
+  <p style="font-size:13px; color:#888; margin-top:-24px;">
+    <strong style="color:#1B2A5C">Desired output:</strong> Prioritized brand rollout plan · Evergreen offer plan per brand · Scale rules (where we push harder vs. hold)
+  </p>
+</div>
+</div>
+
+<!-- ── PROGRAMS ── -->
+<div class="section">
+  <div class="section-label">The Program</div>
+  <div class="section-title">Six Levers. Built for Your Portfolio.</div>
+  <div class="section-sub">Each program is modular — you can activate all of them or start with the ones that matter most right now.</div>
+
+  <div class="program-grid">
+
+    <div class="prog-card">
+      <div class="prog-icon icon-oos">📦</div>
+      <h3>Out-of-Stock Reporting (Stocky) <span class="badge">Start Here</span></h3>
+      <p>Before we scale any promotion, we need shelf confidence. Stocky gives Eagle Brands automated OOS visibility across retailers — so you can fix issues before wasting spend on an empty shelf.</p>
+      <ul class="prog-bullets">
+        <li>Automated OOS alerts to your team (+ sales team if desired)</li>
+        <li>Faster issue resolution, better retailer relationships</li>
+        <li>Ensures velocity programs scale only where they can convert</li>
+        <li>Prevents wasted promotional spend against unavailable product</li>
+      </ul>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-icon icon-locator">🗺️</div>
+      <h3>Store Locator + Reporting Hub</h3>
+      <p>The store locator becomes your conversion and learning engine — not just a static "where to buy" page. We'll operationalize it with weekly/monthly reporting so you always know where intent is concentrated.</p>
+      <ul class="prog-bullets">
+        <li>Locator views, clicks, top geos, and device breakdown</li>
+        <li>Identify friction points (high views, low clicks)</li>
+        <li>Guide where offers, targeting, and budget should scale</li>
+        <li>Pinpoint velocity gaps by retailer and geography</li>
+      </ul>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-icon icon-offers">💸</div>
+      <h3>Evergreen Offers <span class="badge">Core Lever</span></h3>
+      <p>At least one always-on rebate per brand — available across all retailers, featured on the store locator, designed to generate consistent learnings and repeatable ROI.</p>
+      <ul class="prog-bullets">
+        <li>Always-on, scalable, built for sustained velocity</li>
+        <li>Target 20%+ consumer value (baseline recommendation)</li>
+        <li>Target 2–3× ROI where possible</li>
+        <li>Generates learnings that compound over time</li>
+      </ul>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-icon icon-community">🌐</div>
+      <h3>Aisle Community Site</h3>
+      <p>List your evergreen offers on the Aisle community site for incremental volume at zero additional cost. You pay only for redemptions — already included in your subscription.</p>
+      <ul class="prog-bullets">
+        <li>No additional cost to list</li>
+        <li>Pay only for redemptions (included in subscription)</li>
+        <li>Incremental reach beyond your own audience</li>
+        <li>Visibility to Aisle's existing shopper community</li>
+      </ul>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-icon icon-retention">🔁</div>
+      <h3>Retention + Re-engagement</h3>
+      <p>Turn new signups into repeat buyers. We'll build automated re-engagement tracks so contacts don't go dark after their first offer — segmented by brand, geo, retailer, and engagement level.</p>
+      <ul class="prog-bullets">
+        <li>Automated repeat-reward and loyalty-style tracks</li>
+        <li>One-off push campaigns via mass message when needed</li>
+        <li>Segmentation by brand, geo, retailer, and engagement</li>
+        <li>Defined re-engagement plan before any offer goes live</li>
+      </ul>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-icon icon-survey">📋</div>
+      <h3>Insight Surveys (When Needed)</h3>
+      <p>For brands that need deeper consumer visibility, we'll deploy short 5–7 question surveys to capture what's driving — or blocking — purchase decisions.</p>
+      <ul class="prog-bullets">
+        <li>Repeat purchase intent</li>
+        <li>Drivers and barriers to trial</li>
+        <li>Innovation direction signals</li>
+        <li>In-store experience feedback</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Paid media — full width -->
+  <div class="prog-card" style="margin-bottom: 0;">
+    <div style="display: flex; gap: 20px; align-items: flex-start;">
+      <div class="prog-icon icon-paid" style="flex-shrink:0;">⚡</div>
+      <div>
+        <h3>Optional Accelerator: Paid Media</h3>
+        <p>Paid is a force multiplier — but only once we have in-stock confidence and a clear velocity motion. We won't recommend paid until Stocky + evergreen are in place and performing.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px;">
+          <div>
+            <p style="font-weight:700; color:#1B2A5C; margin-bottom:6px;">Routing Options</p>
+            <ul class="prog-bullets">
+              <li>Drive to Eagle's store locator (Eagle controls the experience)</li>
+              <li>Drive to an Aisle page (fastest conversion + list growth)</li>
+            </ul>
+          </div>
+          <div>
+            <p style="font-weight:700; color:#1B2A5C; margin-bottom:6px;">When It Makes Sense</p>
+            <ul class="prog-bullets">
+              <li>Launching at a new retailer? Paid gets people in the door.</li>
+              <li>Supporting a hero SKU? Paid drives trial with clear attribution.</li>
+              <li>Proving velocity to a buyer? Paid + Aisle = verifiable data.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 90-DAY TIMELINE ── -->
+<div style="background: white;">
+<div class="section">
+  <div class="section-label">Execution Plan</div>
+  <div class="section-title">0–90 Day Roadmap</div>
+  <div class="section-sub">A phased approach that builds on itself — foundation first, then optimization, then scale.</div>
+
+  <div class="timeline">
+    <div class="tl-block tl-0">
+      <div class="tl-num" style="color:#4A9CA5">0–30 Days · Foundation</div>
+      <div class="tl-title">Build the Base</div>
+      <ul class="tl-items">
+        <li>Discovery call → align on brands, SKUs, retailers, economics</li>
+        <li>Stand up OOS reporting (Stocky)</li>
+        <li>Activate store locator reporting cadence</li>
+        <li>Launch first evergreen offer(s) on locator + community site</li>
+        <li>Define re-engagement tracks (not yet live)</li>
+      </ul>
+    </div>
+    <div class="tl-block tl-1">
+      <div class="tl-num" style="color:#F07040">31–60 Days · Optimize</div>
+      <div class="tl-title">Learn and Adjust</div>
+      <ul class="tl-items">
+        <li>Optimize evergreen offers based on early data</li>
+        <li>Launch re-engagement tracks for initial signups</li>
+        <li>Start paid media for priority brands (if in scope + in-stock confirmed)</li>
+        <li>Deploy surveys for any brands needing consumer insight</li>
+        <li>Monthly business review — review KPIs vs. targets</li>
+      </ul>
+    </div>
+    <div class="tl-block tl-2">
+      <div class="tl-num" style="color:#7A2244">61–90 Days · Scale</div>
+      <div class="tl-title">Double Down</div>
+      <ul class="tl-items">
+        <li>Add targeted retailer/SKU programs based on data</li>
+        <li>Scale what's working; pause what isn't</li>
+        <li>Expand to remaining brands in portfolio</li>
+        <li>Formalize ongoing monthly business review cadence</li>
+        <li>Build case study + velocity proof for buyers</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <div style="font-size:20px; font-weight:700;">Ready to build this together?</div>
+  <p>Let's align on discovery inputs and get the first brand live within 30 days.</p>
+  <a class="cta" href="https://www.gotoaisle.com">gotoaisle.com</a>
+</div>
+
+</body>
+</html>
